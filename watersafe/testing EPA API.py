@@ -15,11 +15,19 @@ def do_GET(url):
   return content
 
 def get_pws_by_county(county_code):
-  url = "http://iaspub.epa.gov/enviro/efservice/PWS_COUNTY/fipscounty/{0}/json".format(42101)
+  url = "http://iaspub.epa.gov/enviro/efservice/PWS_COUNTY/fipscounty/{0}/json".format(county_code)
   response = do_GET(url)
   return json.loads(response)
 
+def get_violations_by_pws(pwsid):
+  url = "http://iaspub.epa.gov/enviro/efservice/VIOLATION/PWSID/{0}/json".format(pwsid)
+  response = do_GET(url)
+  return json.loads(response)
 
 philly_county_code = 42101
 water_systems = get_pws_by_county(philly_county_code)
-print water_systems
+
+for water_system in water_systems:
+  pwsid = water_system['PWSID']
+  violations = get_violations_by_pws(pwsid) 
+  print violations
