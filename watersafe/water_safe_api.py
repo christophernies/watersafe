@@ -9,11 +9,14 @@ import json
 from bs4 import BeautifulSoup
 http = httplib2.Http()
 
+# XXX He's dead, Jim. 
+# This site limits us to 30 requests a day, oh well.
 # Scrape http://zip-info.com to get county info
 def get_county_by_zip(zip):
   url = "http://www.zip-info.com/cgi-local/zipsrch.exe?cnty=cnty&zip={0}&Go=Go".format(zip)
   response = do_GET(url)
   soup = BeautifulSoup(response)
+  print soup.prettify()
 
   # There's a handful of tables in the page, the one we care about is the third one.
   results_table_index = 3
