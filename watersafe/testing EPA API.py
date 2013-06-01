@@ -7,7 +7,7 @@ import httplib2
 
 http = httplib2.Http()
 
-url = "http://iaspub.epa.gov/enviro/efservice/tri_facility/state_abbr/VA/rows/499:504"
+url = "http://iaspub.epa.gov/enviro/efservice/tri_facility/state_abbr/VA/rows/499:504/json"
 body = {}
 headers = {'Content-type': 'application/x-www-form-urlencoded'}
 response, content = http.request(url, 'GET', headers=headers, body=urllib.urlencode(body))
