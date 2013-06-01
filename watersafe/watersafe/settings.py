@@ -12,9 +12,9 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'watersafe',                      # Or path to database file if using sqlite3.
-        'USER': 'admin',                      # Not used with sqlite3.
-        'PASSWORD': 'admin',                  # Not used with sqlite3.
+        'NAME': 'watersafe',                      # Or path to database file if using sqlite3. #CHANGE_ME
+        'USER': 'admin',                      # Not used with sqlite3. #CHANGE_ME
+        'PASSWORD': 'admin',                  # Not used with sqlite3. #CHANGE_ME
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -28,7 +28,7 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/New_York'
+TIME_ZONE = 'America/New_York' #CHANGE_ME
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -107,6 +107,7 @@ ROOT_URLCONF = 'watersafe.urls'
 WSGI_APPLICATION = 'watersafe.wsgi.application'
 
 TEMPLATE_DIRS = (
+    "/home/nies/Documents/watersafe/watersafe/templates", #CHANGE_ME
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

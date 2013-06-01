@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from watersafe_site.views import Search
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -6,6 +7,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     # Examples:
+    ('^$', Search),
     # url(r'^$', 'watersafe.views.home', name='home'),
     # url(r'^watersafe/', include('watersafe.foo.urls')),
 
