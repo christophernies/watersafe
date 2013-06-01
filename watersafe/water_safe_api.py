@@ -16,7 +16,6 @@ def get_county_by_zip(zip):
   url = "http://www.zip-info.com/cgi-local/zipsrch.exe?cnty=cnty&zip={0}&Go=Go".format(zip)
   response = do_GET(url)
   soup = BeautifulSoup(response)
-  print soup.prettify()
 
   # There's a handful of tables in the page, the one we care about is the third one.
   results_table_index = 3
@@ -27,6 +26,13 @@ def get_county_by_zip(zip):
   county_code_tag = results_table.find_all('td')[county_column_index]
   county_code = county_code_tag.contents
   return county_code
+
+def get_zip_from_address(address):
+  encoded_address = urllib.quote(address)  
+  url = "http://maps.google.com/maps/api/geocode/json?address={0}&sensor=false".format(encoded_address)
+  response = do_GET(url)
+  geocode_info = json.loads(response)
+  print geocode_info.keys()
 
 def do_GET(url):
   body = {}
@@ -47,7 +53,10 @@ def get_violations_by_pws(pwsid):
 ## Debug stuffs
 
 # Test getting county by zip
-print get_county_by_zip(19131)
+# print get_county_by_zip(19131)
+
+# Test getting zip by address
+print get_zip_from_address("20 North 3rd Street, Philadelphia PA")
 
 # Test getting violations by county
 # philly_county_code = 42101
