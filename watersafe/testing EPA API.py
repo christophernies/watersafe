@@ -4,19 +4,22 @@
 
 import urllib
 import httplib2
+import json
 
 http = httplib2.Http()
 
-def request_url(url):
+def do_GET(url):
   body = {}
   headers = {'Content-type': 'application/x-www-form-urlencoded'}
   response, content = http.request(url, 'GET', headers=headers, body=urllib.urlencode(body))
   return content
 
-def get_pws_for_county(county_code):
-  url =  "http://iaspub.epa.gov/enviro/efservice/PWS_COUNTY/fipscounty/{0}/json".format(42101)
-  return request_url(url)
+def get_pws_by_county(county_code):
+  url = "http://iaspub.epa.gov/enviro/efservice/PWS_COUNTY/fipscounty/{0}/json".format(42101)
+  response = do_GET(url)
+  return json.loads(response)
+
 
 philly_county_code = 42101
-response = get_pws_for_county(philly_county_code)
-print response
+water_systems = get_pws_by_county(philly_county_code)
+print water_systems
