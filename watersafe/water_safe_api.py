@@ -73,6 +73,24 @@ def get_county_by_zip(zip):
   county_code = county_code_tag.contents
   return county_code
 
+def get_count(county_code):
+  # Probably will want to pass the connection in.
+  engine = create_engine('mysql://admin:admin@localhost/watersafe')
+  connection = engine.connect()
+
+  query = """
+    SELECT CSM.`FIPS_COUNTY_ID` countyid,  CSM.`COUNTY_NAME` countyname, count(*) violations
+    FROM PA_H20_VIOLATION PAH, COUNTY_STATE_MAPPING CSM
+    WHERE PAH.`Vtype` NOT IN ('MR','Other')
+    AND PAH.`County` = CSM.`FIPS_COUNTY_ID`
+    AND YEAR(PAH.`comp_begin_date`) >= 2012
+    AND CSM.`FIPS_COUNTY_ID` = {0} 
+  """
+  results = connection.execute(query.format(county_code))
+
+  count = [result[2] for result in results ]
+  return count[0]
+
 ## Debug stuffs
 
 # Test getting county by zip
@@ -92,5 +110,8 @@ def get_county_by_zip(zip):
 #   print violations
 
 # Test database queries for county codes works
-test_address = "20 N. 3rd St Philadelphia"
-print get_county_code_by_address(test_address)
+# test_address = "20 N. 3rd St Philadelphia"
+# print get_county_code_by_address(test_address)
+
+# Test getting the count of violations by county
+print get_count(42101)
