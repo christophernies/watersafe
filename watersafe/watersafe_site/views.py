@@ -44,6 +44,22 @@ def get_county_code_by_address(address):
   result.close()
   return counties[0]
 
+def get_county_name_by_zip(zip):
+  # Probably will want to pass the connection in.
+  engine = create_engine('mysql://admin:admin@localhost/watersafe')
+  connection = engine.connect()
+
+  query = """
+      SELECT CSM.`COUNTY_NAME`
+    FROM COUNTY_STATE_MAPPING CSM, ZIP_COUNTY_MAPPING ZCM
+    WHERE CSM.`FIPS_COUNTY_ID` = ZCM.`FIPS_COUNTY_ID`
+    AND ZCM.`ZIP` = {0}
+  """
+  results = connection.execute(query.format(zip))
+  county_names = [result[0] for result in results]
+  county_name = county_names[0]
+
+  return county_name
 def get_ranking_info_by_county(county_code):
   # Probably will want to pass the connection in.
   engine = create_engine('mysql://admin:admin@localhost/watersafe')
@@ -124,6 +140,7 @@ def Search(request):
   county_code = get_county_code_by_address(address)
   ranking_info = get_ranking_info_by_county(county_code)
   pws_info = get_pws_details_by_county(county_code)
+  county_name = get_county_name_by_zip(19131)
 
   if ranking_info['bucket'] == "G":
     rating_type = "green-rating"
@@ -135,7 +152,6 @@ def Search(request):
     rating_type = "red-rating"
     rating_button = "red_button"
 
-
   return render_to_response('results.html', {
       'county_id': county_code, 
       'address': address,
@@ -144,5 +160,6 @@ def Search(request):
       'rank': ranking_info['rank'],
       'rating_type': rating_type,
       'rating_button': rating_button,
-      'pws_info': pws_info
+      'pws_info': pws_info,
+      'county_name': county_name.lower()
   }, context_instance=RequestContext(request))
