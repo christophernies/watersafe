@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.0.67)
 # Database: watersafe
-# Generation Time: 2013-06-01 22:45:34 +0000
+# Generation Time: 2013-06-02 19:02:09 +0000
 # ************************************************************
 
 
@@ -26,9 +26,10 @@
 DROP TABLE IF EXISTS `COUNTY_STATE_MAPPING`;
 
 CREATE TABLE `COUNTY_STATE_MAPPING` (
-  `FIPS_COUNTY_ID` varchar(255) default NULL,
+  `FIPS_COUNTY_ID` varchar(255) NOT NULL default '',
   `COUNTY_NAME` varchar(255) default NULL,
-  `STATE` varchar(255) default NULL
+  `STATE` varchar(255) default NULL,
+  PRIMARY KEY  (`FIPS_COUNTY_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 LOCK TABLES `COUNTY_STATE_MAPPING` WRITE;
@@ -244,7 +245,6 @@ VALUES
 	('06031','KINGS','CA'),
 	('06033','LAKE','CA'),
 	('06035','LASSEN','CA'),
-	('06037','LOS ANGELES','CA'),
 	('06037','LOS ANGELES','CA'),
 	('06039','MADERA','CA'),
 	('06041','MARIN','CA'),
@@ -3321,7 +3321,8 @@ DROP TABLE IF EXISTS `ZIP_COUNTY_MAPPING`;
 
 CREATE TABLE `ZIP_COUNTY_MAPPING` (
   `ZIP` varchar(255) default NULL,
-  `FIPS_COUNTY_ID` varchar(255) default NULL
+  `FIPS_COUNTY_ID` varchar(255) default NULL,
+  KEY `FIPS_COUNTY_ID` (`FIPS_COUNTY_ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 LOCK TABLES `ZIP_COUNTY_MAPPING` WRITE;
