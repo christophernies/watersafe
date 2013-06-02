@@ -2,5 +2,5 @@
 *.pyc
 *.DS_Store
 .DS_Store
-
+watersafe/watersafe_site/api_keys.py
 watersafe/watersafe/settings.py
