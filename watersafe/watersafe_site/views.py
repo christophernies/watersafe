@@ -86,9 +86,9 @@ def search_form(request):
 
 def Search(request):
   if 'address' in request.GET:
-        test_address = request.GET['address']
-  else: test_address = "20 N. 3rd St Philadelphia"
-  test_county_code = get_county_code_by_address(test_address)
+        address = request.GET['address']
+  else: address = "20 N. 3rd St Philadelphia"
+  county_code = get_county_code_by_address(address)
 
-  return render_to_response('results.html',{'msg':test_county_code}, context_instance=RequestContext(request))
+  return render_to_response('results.html',{'county_id':county_code, 'address':address}, context_instance=RequestContext(request))
 
