@@ -44,15 +44,20 @@
 			<div class="detail-view right">
 
 				<div class=" {{ rating_type }} rating">
-					<h1>GREAT!</h1>
+					<h1>
+						{% if bucket == "G" %}
+							GREAT!
+						{% elif == "Y" %}
+							WARNING!
+						{% else %}
+							NEEDS ACTION!
+						{% end %}
+					</h1>
 					<hr />
 
-					<ul>
-						<li>Important Information Number 1</li>
-						<li>Important Information Number 2</li>
-						<li>Important Information Number 3</li>
-						<li>Important Information Number 4</li>
-					</ul>
+					<p>
+
+					</p>
 
 					<div class="sharing right">
 						<div class="social-icons left">
@@ -66,7 +71,7 @@
 						</div>
 
 						<div class="rep-button right">
-              <button class="{{rating_button}}"> 
+              				<button class="{{rating_button}}"> 
 								{% if bucket == "G" %}
    									Thank Your Rep
 								{% else %}
@@ -80,6 +85,8 @@
 				</div>
 
 				<br />
+				<h2>Map Violations by County</h2>
+				<iframe width="660" height="380" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col1+from+1LgtFNMlxShzmrUQc4U7uBYRfv6UjAR6JTXOZUTY&amp;viz=MAP&amp;h=false&amp;lat=40.757678557632595&amp;lng=-77.19808893750002&amp;t=1&amp;z=7&amp;l=col1&amp;y=3&amp;tmplt=5"></iframe>
 				
 			</div>
 			<br class="clear-both" />
