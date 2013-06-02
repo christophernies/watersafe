@@ -30,8 +30,8 @@
 
 				<div class="search-on-results">
 					<form action="/results" method="post">
-						<input type="text" name="search" id="address" placeholder="Type in your address..."/>
-						<input type="submit" name="submit_btn" />
+						<input type="text" name="address" id="address" placeholder="Type in your address..."/>
+						<input type="submit" />
 					</form>
 				</div>
 			</div>
@@ -51,6 +51,7 @@
 					<hr />
 
 					<p>
+						<br />
 						{% if bucket == "G" %}
                             Your water is in great shape.
                         {% elif bucket == "Y" %}
@@ -60,6 +61,7 @@
                         {% endif %}
 					</p>
 
+					<br />
 					<div class="sharing">
 						<div>
 							<button class="green-button">
@@ -69,10 +71,17 @@
                                     Contact Rep
                                 {% endif %}
 							</button>
-							<button class="green-button">Tell Others to Check</button>
+							<button class="green-button tell-others">Tell Others to Check</button>
 						</div>
 					</div>
-
+					<script type="text/javascript" scr="http://code.jquery.com/jquery-latest.js"></script>
+					<script type="text/javascript">
+						$(document).ready(function() {
+							$('.tell-others').click(function(){
+								$('.social').slideToggle(300);
+							});
+						});
+					</script>
 					<div class="social" style="display:none;">
 						<!-- AddThis Button BEGIN -->
 						<div class="addthis_toolbox addthis_default_style ">
