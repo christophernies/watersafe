@@ -115,10 +115,23 @@ def Search(request):
 
   ranking_info = get_ranking_info_by_county(county_code)
 
+  if ranking_info['bucket'] == "G":
+    rating_type = "green-rating"
+    rating_button = "green-button"
+  elif ranking_info['bucket'] == "Y":
+    rating_type = "yellow-rating"
+    rating_button = "yellow_button"
+  else: 
+    rating_type = "red-rating"
+    rating_button = "red_button"
+
+
   return render_to_response('results.html', {
       'county_id': county_code, 
       'address': address,
       'incident_count': ranking_info['incident_count'],
       'bucket': ranking_info['bucket'],
       'rank': ranking_info['rank'],
+      'rating_type': rating_type.
+      'rating_button': rating_button
   }, context_instance=RequestContext(request))
