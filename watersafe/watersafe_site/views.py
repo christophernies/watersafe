@@ -102,7 +102,7 @@ def get_pws_details_by_county(county_code):
     county['contaminant'] = result[7]
     county['contaminant_measure'] = result[8]
     county_list.append(county)
-return county_list
+  return county_list
 
 def search_form(request):
   return render_to_response('index.html', context_instance=RequestContext(request))
@@ -114,4 +114,3 @@ def Search(request):
   county_code = get_county_code_by_address(address)
 
   return render_to_response('results.html',{'county_id':county_code, 'address':address}, context_instance=RequestContext(request))
-
