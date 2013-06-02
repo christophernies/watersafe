@@ -1,2 +1,4 @@
 *.sw?
 *.pyc
+
+watersafe/settings.py
