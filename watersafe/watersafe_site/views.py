@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext, loader
 from datetime import timedelta, date
 import json, urllib, httplib2
+from keys import *
 from sqlalchemy import create_engine
 from bs4 import BeautifulSoup
 
@@ -99,6 +100,10 @@ def get_pws_details_by_county(county_code):
     county['contaminant_measure'] = result[8]
     county_list.append(county)
   return county_list
+
+def Contact:
+    cicero_url = 'https://cicero.azavea.com/v3.1/official?search_address='+address+'&search_country=US&user=watersafe&key='+cicero_api_key
+
 
 def search_form(request):
   return render_to_response('index.html', context_instance=RequestContext(request))
