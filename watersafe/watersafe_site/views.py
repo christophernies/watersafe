@@ -58,6 +58,26 @@ def get_county_code_by_address(address):
   result.close()
   return counties[0]
 
+def get_count(county_code):
+  # Probably will want to pass the connection in.
+  engine = create_engine('mysql://admin:admin@localhost/watersafe')
+  connection = engine.connect()
+
+  results = connection.execute('')
+
+  for result in result:
+    print result
+
+def get_pws_details_by_county(county_code):
+  # Probably will want to pass the connection in.
+  engine = create_engine('mysql://admin:admin@localhost/watersafe')
+  connection = engine.connect()
+
+  results = connection.execute('')
+
+  for result in result:
+    print result
+
 # XXX He's dead, Jim. 
 # This site limits us to 30 requests a day, oh well.
 # Scrape http://zip-info.com to get county info
@@ -75,8 +95,6 @@ def get_county_by_zip(zip):
   county_code_tag = results_table.find_all('td')[county_column_index]
   county_code = county_code_tag.contents
   return county_code
-
-
 
 def Search(request):
   test_address = "20 N. 3rd St Philadelphia"
