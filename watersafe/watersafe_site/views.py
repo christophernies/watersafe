@@ -116,7 +116,10 @@ def Search(request):
     address = request.POST['address']
   else: 
     address = "20 N. 3rd St Philadelphia"
-  contact_results = Contact(address)
+  contact_results = json.loads(Contact(address))
+  senator = contact_results['response']['results']['candidates'][0]['officials'][1]
+  representative = contact_results['response']['results']['candidates'][0]['officials'][2]
+  print representative
 
   county_code = get_county_code_by_address(address)
   ranking_info = get_ranking_info_by_county(county_code)
