@@ -88,7 +88,7 @@ def get_count(county_code):
   """
   results = connection.execute(query.format(county_code))
 
-  count = [result[2] for result in results ]
+  count = [result[2] for result in results]
   return count[0]
 
 ## Debug stuffs
