@@ -12,13 +12,13 @@
 
 		<div id="search-form">
 			<div class="fields">
-				<form action="./results" method="post">{% csrf_token %}
-					<input type="text" name="search" id="address" placeholder="Enter your address..." />
+				<form action="./results" method="POST">{% csrf_token %}
+					<input type="text" name="address" id="address" placeholder="Enter your address..." />
 					<br />
 					<br />
 
 					<div class="right">
-						<input type="submit" name="submit_btn" class="hows-the-water" value="How's My Water?" />
+						<input type="submit" class="hows-the-water" value="How's My Water?" />
 					</div>
 					<br style="clear-right" />
 				</form>

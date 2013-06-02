@@ -108,8 +108,9 @@ def search_form(request):
   return render_to_response('index.html', context_instance=RequestContext(request))
 
 def Search(request):
-  if 'address' in request.GET:
-        address = request.GET['address']
+  print request.POST
+  if 'address' in request.POST:
+        address = request.POST['address']
   else: address = "20 N. 3rd St Philadelphia"
   county_code = get_county_code_by_address(address)
 
@@ -132,6 +133,6 @@ def Search(request):
       'incident_count': ranking_info['incident_count'],
       'bucket': ranking_info['bucket'],
       'rank': ranking_info['rank'],
-      'rating_type': rating_type.
+      'rating_type': rating_type,
       'rating_button': rating_button
   }, context_instance=RequestContext(request))
