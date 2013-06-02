@@ -118,12 +118,12 @@ def Search(request):
   else: address = "20 N. 3rd St Philadelphia"
   county_code = get_county_code_by_address(address)
 
-  ranking_info get_ranking_info_by_county(county_code)
+  ranking_info = get_ranking_info_by_county(county_code)
 
   return render_to_response('results.html', {
       'county_id': county_code, 
       'address': address,
       'incident_count': ranking_info['incident_count'],
-      'bucket': ranking_info[bucket],
+      'bucket': ranking_info['bucket'],
       'rank': ranking_info['rank'],
   }, context_instance=RequestContext(request))
