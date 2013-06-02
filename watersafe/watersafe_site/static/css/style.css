@@ -35,6 +35,10 @@ body {
 	width:657px;
 }
 
+.detail-view {
+    width: 640px;
+}
+
 .map-view .map-box {
 	padding: 10px;
 	border:1px solid #ddd;
@@ -351,7 +355,7 @@ a:hover {
 }
 
 #details .item {
-	width: 270px;
+	width: 260px;
 	padding: 20px;
 	border: 1px solid #ddd;
 	border-radius: 6px;
@@ -359,6 +363,7 @@ a:hover {
 	box-shadow: 0 1px 2px 0 #ddd;
 	float: left;
 	margin-right: 14px;
+  margin-bottom: 20px;
 }
 
 #details .item p {

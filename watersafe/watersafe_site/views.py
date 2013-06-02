@@ -114,7 +114,9 @@ def get_pws_details_by_county(county_code):
     county['contaminant'] = result[7]
     county['contaminant_measure'] = result[8]
     county_list.append(county)
+  print county_list
   return county_list
+
 
 def Contact(address):
   address = address.replace(' ','+')
