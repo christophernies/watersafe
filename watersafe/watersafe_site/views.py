@@ -87,7 +87,6 @@ def get_pws_details_by_county(county_code):
 
   county_list = []
   for result in results:
-    print result[4]
     county = {}
     county['pwsid'] = result[0]
     county['pws_name'] = result[1]
