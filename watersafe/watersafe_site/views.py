@@ -108,8 +108,8 @@ def search_form(request):
   return render_to_response('index.html', context_instance=RequestContext(request))
 
 def Search(request):
-  if 'search' in request.POST:
-    address = request.POST['search']
+  if 'address' in request.POST:
+    address = request.POST['address']
   else: 
     address = "20 N. 3rd St Philadelphia"
 
