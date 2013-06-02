@@ -108,11 +108,12 @@ def search_form(request):
   return render_to_response('index.html', context_instance=RequestContext(request))
 
 def Search(request):
-  if 'address' in request.GET:
-        address = request.GET['address']
-  else: address = "20 N. 3rd St Philadelphia"
-  county_code = get_county_code_by_address(address)
+  if 'search' in request.POST:
+        address = request.POST['search']
+  else: 
+    address = "20 N. 3rd St Philadelphia"
 
+  county_code = get_county_code_by_address(address)
   ranking_info = get_ranking_info_by_county(county_code)
 
   if ranking_info['bucket'] == "G":
