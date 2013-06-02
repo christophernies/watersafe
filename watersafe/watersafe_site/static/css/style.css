@@ -195,6 +195,40 @@ a:hover {
    }
 
 
+.learn-more {
+    border:none;
+   border-top: 1px solid #fafafa;
+   background: #ccc;
+   background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
+   background: -webkit-linear-gradient(top, #eee, #ccc);
+   background: -moz-linear-gradient(top, #eee, #ccc);
+   background: -ms-linear-gradient(top, #eee, #ccc);
+   background: -o-linear-gradient(top, #eee, #ccc);
+   padding: 8px 16px;
+   -webkit-border-radius: 4px;
+   -moz-border-radius: 4px;
+   border-radius: 4px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.learn-more:hover {
+   border-top-color: #187fc4;
+   background: #f5f5f5;
+   color: #ffffff;
+   }
+.learn-more:active {
+   border-top-color: #1b435e;
+   background: #aaa;
+   }
+
+
   .red-button {
    border-top: 1px solid #f79797;
    background: #733535;
