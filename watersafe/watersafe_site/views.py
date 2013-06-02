@@ -156,7 +156,6 @@ def Search(request):
   county_code = get_county_code_by_address(address)
   ranking_info = get_ranking_info_by_county(county_code)
   pws_info = get_pws_details_by_county(county_code)
-  county_name = get_county_name_by_zip(19131)
 
   if ranking_info['bucket'] == "G":
     rating_type = "green-rating"
@@ -176,6 +175,5 @@ def Search(request):
       'rank': ranking_info['rank'],
       'rating_type': rating_type,
       'rating_button': rating_button,
-      'pws_info': pws_info,
-      'county_name': county_name.lower()
+      'pws_info': pws_info
   }, context_instance=RequestContext(request))
