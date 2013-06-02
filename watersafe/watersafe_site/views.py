@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext, loader
 from datetime import timedelta, date
 import json, urllib, httplib2
-from keys import *
+from api_keys import *
 from sqlalchemy import create_engine
 from bs4 import BeautifulSoup
 
