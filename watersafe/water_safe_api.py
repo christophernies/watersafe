@@ -9,6 +9,8 @@ import json
 from bs4 import BeautifulSoup
 http = httplib2.Http()
 
+# XXX He's dead, Jim. 
+# This site limits us to 30 requests a day, oh well.
 # Scrape http://zip-info.com to get county info
 def get_county_by_zip(zip):
   url = "http://www.zip-info.com/cgi-local/zipsrch.exe?cnty=cnty&zip={0}&Go=Go".format(zip)
@@ -24,6 +26,22 @@ def get_county_by_zip(zip):
   county_code_tag = results_table.find_all('td')[county_column_index]
   county_code = county_code_tag.contents
   return county_code
+
+def get_zip_from_address(address):
+  encoded_address = urllib.quote(address)  
+  url = "http://maps.google.com/maps/api/geocode/json?address={0}&sensor=false".format(encoded_address)
+  response = do_GET(url)
+  geocode_info = json.loads(response)
+
+  if geocode_info['status'] != 'OK':
+    print "Status is not OK"
+  elif len(geocode_info['results']) == 0:
+    print "No results were returned."
+  else:
+    address_components = geocode_info['results'][0]['address_components']
+    for component in address_components:
+      if 'postal_code' in component['types']:
+        return component['short_name']
 
 def do_GET(url):
   body = {}
@@ -44,7 +62,11 @@ def get_violations_by_pws(pwsid):
 ## Debug stuffs
 
 # Test getting county by zip
-print get_county_by_zip(19131)
+# print get_county_by_zip(19131)
+
+# Test getting zip by address
+test_address = "20 North 3rd Street, Philadelphia PA"
+print get_zip_from_address(test_address)
 
 # Test getting violations by county
 # philly_county_code = 42101
