@@ -6,8 +6,54 @@ import urllib
 import httplib2
 import json
 
+from sqlalchemy import create_engine
 from bs4 import BeautifulSoup
+
 http = httplib2.Http()
+
+def do_GET(url):
+  body = {}
+  headers = {'Content-type': 'application/x-www-form-urlencoded'}
+  response, content = http.request(url, 'GET', headers=headers, body=urllib.urlencode(body))
+  return content
+
+def get_pws_by_county(county_code):
+  url = "http://iaspub.epa.gov/enviro/efservice/PWS_COUNTY/fipscounty/{0}/json".format(county_code)
+  response = do_GET(url)
+  return json.loads(response)
+
+def get_violations_by_pws(pwsid):
+  url = "http://iaspub.epa.gov/enviro/efservice/VIOLATION/PWSID/{0}/json".format(pwsid)
+  response = do_GET(url)
+  return json.loads(response)
+
+def get_zip_from_address(address):
+  encoded_address = urllib.quote(address)  
+  url = "http://maps.google.com/maps/api/geocode/json?address={0}&sensor=false".format(encoded_address)
+  response = do_GET(url)
+  geocode_info = json.loads(response)
+
+  if geocode_info['status'] != 'OK':
+    print "Status is not OK"
+  elif len(geocode_info['results']) == 0:
+    print "No results were returned."
+  else:
+    address_components = geocode_info['results'][0]['address_components']
+    for component in address_components:
+      if 'postal_code' in component['types']:
+        return component['short_name']
+
+def get_county_code_by_address(address):
+  zip = get_zip_from_address(address)
+
+  # Probably will want to pass the connection in.
+  engine = create_engine('mysql://root:root@localhost/watersafe')
+  connection = engine.connect()
+
+  result = connection.execute('select fips_county_id from zip_county_mapping where zip={0}'.format(zip).upper())
+  counties = [row[0] for row in result]
+  result.close()
+  return counties[0]
 
 # XXX He's dead, Jim. 
 # This site limits us to 30 requests a day, oh well.
@@ -27,46 +73,14 @@ def get_county_by_zip(zip):
   county_code = county_code_tag.contents
   return county_code
 
-def get_zip_from_address(address):
-  encoded_address = urllib.quote(address)  
-  url = "http://maps.google.com/maps/api/geocode/json?address={0}&sensor=false".format(encoded_address)
-  response = do_GET(url)
-  geocode_info = json.loads(response)
-
-  if geocode_info['status'] != 'OK':
-    print "Status is not OK"
-  elif len(geocode_info['results']) == 0:
-    print "No results were returned."
-  else:
-    address_components = geocode_info['results'][0]['address_components']
-    for component in address_components:
-      if 'postal_code' in component['types']:
-        return component['short_name']
-
-def do_GET(url):
-  body = {}
-  headers = {'Content-type': 'application/x-www-form-urlencoded'}
-  response, content = http.request(url, 'GET', headers=headers, body=urllib.urlencode(body))
-  return content
-
-def get_pws_by_county(county_code):
-  url = "http://iaspub.epa.gov/enviro/efservice/PWS_COUNTY/fipscounty/{0}/json".format(county_code)
-  response = do_GET(url)
-  return json.loads(response)
-
-def get_violations_by_pws(pwsid):
-  url = "http://iaspub.epa.gov/enviro/efservice/VIOLATION/PWSID/{0}/json".format(pwsid)
-  response = do_GET(url)
-  return json.loads(response)
-
 ## Debug stuffs
 
 # Test getting county by zip
 # print get_county_by_zip(19131)
 
 # Test getting zip by address
-test_address = "20 North 3rd Street, Philadelphia PA"
-print get_zip_from_address(test_address)
+# test_address = "20 North 3rd Street, Philadelphia PA"
+# print get_zip_from_address(test_address)
 
 # Test getting violations by county
 # philly_county_code = 42101
@@ -76,3 +90,7 @@ print get_zip_from_address(test_address)
 #   pwsid = water_system['PWSID']
 #   violations = get_violations_by_pws(pwsid) 
 #   print violations
+
+# Test database queries for county codes works
+test_address = "20 North 3rd Street, Philadelphia PA"
+print get_county_code_by_address(test_address)
