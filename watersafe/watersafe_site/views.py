@@ -81,10 +81,14 @@ def get_pws_details_by_county(county_code):
   for result in result:
     print result
 
+def search_form(request):
+  return render_to_response('index.html', context_instance=RequestContext(request))
+
 def Search(request):
   if 'address' in request.GET:
         test_address = request.GET['address']
   else: test_address = "20 N. 3rd St Philadelphia"
   test_county_code = get_county_code_by_address(test_address)
 
-  return render_to_response('address.html',{'msg':test_county_code})
+  return render_to_response('results.html',{'msg':test_county_code}, context_instance=RequestContext(request))
+
