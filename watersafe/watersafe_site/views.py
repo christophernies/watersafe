@@ -58,10 +58,18 @@ def get_count(county_code):
   engine = create_engine('mysql://admin:admin@localhost/watersafe')
   connection = engine.connect()
 
-  results = connection.execute('')
+  query = """
+    SELECT CSM.`FIPS_COUNTY_ID` countyid,  CSM.`COUNTY_NAME` countyname, count(*) violations
+    FROM PA_H20_VIOLATION PAH, COUNTY_STATE_MAPPING CSM
+    WHERE PAH.`Vtype` NOT IN ('MR','Other')
+    AND PAH.`County` = CSM.`FIPS_COUNTY_ID`
+    AND YEAR(PAH.`comp_begin_date`) >= 2012
+    AND CSM.`FIPS_COUNTY_ID` = {0} 
+  """
+  results = connection.execute(query.format(county_code))
 
-  for result in result:
-    print result
+  count = [result[2] for result in results]
+  return count[0]
 
 def get_pws_details_by_county(county_code):
   # Probably will want to pass the connection in.
