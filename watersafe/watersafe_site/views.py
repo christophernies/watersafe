@@ -75,5 +75,5 @@ def get_county_by_zip(zip):
 
 def Search(request):
   test_address = "20 N. 3rd St Philadelphia"
-  a = get_county_code_by_address(test_address)
-  return render_to_response('index.html',{'msg':a})
+  test_county_code = get_county_code_by_address(test_address)
+  return render_to_response('index.html',{'msg':test_county_code})
