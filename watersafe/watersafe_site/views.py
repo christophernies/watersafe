@@ -76,10 +76,33 @@ def get_pws_details_by_county(county_code):
   engine = create_engine('mysql://admin:admin@localhost/watersafe')
   connection = engine.connect()
 
-  results = connection.execute('')
+  query = """
+    SELECT PWS.`PWS.PWSID` , PWS.`PWS.PWSNAME` , PWS.`PWS.CONTACTCITY` contact_city , PWS.`PWS.PSOURCE_LONGNAME` water_source, PWS.`PWS.RETPOPSRVD` population_served
+    , PWS.`PWS.STATUS` pws_status , PAH.`vname` violation_name, PAH.`cname` contaminant, PAH.`viomeasure` violation_measure
+    FROM PA_H20_VIOLATION PAH, PWS
+    WHERE PAH.`pwsid` = PWS.`PWS.PWSID`
+    AND PAH.`Vtype` NOT IN ('MR','Other')
+    AND YEAR(PAH.`comp_begin_date`) >= 2012
+    AND PAH.`County` = {0} 
+  """
 
-  for result in result:
-    print result
+  results = connection.execute(query.format(county_code))
+
+  county_list = []
+  for result in results:
+    print result[4]
+    county = {}
+    county['pwsid'] = result[0]
+    county['pws_name'] = result[1]
+    county['contact_city'] = result[2]
+    county['source_long_name'] = result[3]
+    county['population_served'] = result[4]
+    county['pws_status'] = result[5]
+    county['violation_name'] = result[6]
+    county['contaminant'] = result[7]
+    county['contaminant_measure'] = result[8]
+    county_list.append(county)
+return county_list
 
 def search_form(request):
   return render_to_response('index.html', context_instance=RequestContext(request))
