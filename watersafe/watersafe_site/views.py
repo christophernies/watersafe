@@ -133,14 +133,29 @@ def Search(request):
   else: 
     address = "20 N. 3rd St Philadelphia"
   contact_results = json.loads(Contact(address))
-  senator = contact_results['response']['results']['candidates'][0]['officials'][1]
-  representative = contact_results['response']['results']['candidates'][0]['officials'][2]
-  print representative
-
+  senator1 = contact_results['response']['results']['candidates'][0]['officials'][1]
+  senator2 = contact_results['response']['results']['candidates'][0]['officials'][2]
+  governor = contact_results['response']['results']['candidates'][0]['officials'][4]
+  representative = contact_results['response']['results']['candidates'][0]['officials'][11]
+  #1 Senator
+  #2 Senator
+  #3 Lt gov
+  #4 Governor
+  #5 Auditor general
+  #6 Attorney General
+  #7 Representative
+  #8 State Treasurer
+  #9 President
+  #10 Representative
+  #11 Senator
+  print governor['first_name']
+  print governor['last_name']
+  print governor['office']['title']
+  #print representative['office']['title']
+  
   county_code = get_county_code_by_address(address)
   ranking_info = get_ranking_info_by_county(county_code)
   pws_info = get_pws_details_by_county(county_code)
-  county_name = get_county_name_by_zip(19131)
 
   if ranking_info['bucket'] == "G":
     rating_type = "green-rating"
@@ -160,6 +175,5 @@ def Search(request):
       'rank': ranking_info['rank'],
       'rating_type': rating_type,
       'rating_button': rating_button,
-      'pws_info': pws_info,
-      'county_name': county_name.lower()
+      'pws_info': pws_info
   }, context_instance=RequestContext(request))
