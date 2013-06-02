@@ -16,16 +16,6 @@ def do_GET(url):
   response, content = http.request(url, 'GET', headers=headers, body=urllib.urlencode(body))
   return content
 
-def get_pws_by_county(county_code):
-  url = "http://iaspub.epa.gov/enviro/efservice/PWS_COUNTY/fipscounty/{0}/json".format(county_code)
-  response = do_GET(url)
-  return json.loads(response)
-
-def get_violations_by_pws(pwsid):
-  url = "http://iaspub.epa.gov/enviro/efservice/VIOLATION/PWSID/{0}/json".format(pwsid)
-  response = do_GET(url)
-  return json.loads(response)
-
 def get_zip_from_address(address):
   encoded_address = urllib.quote(address)  
   url = "http://maps.google.com/maps/api/geocode/json?address={0}&sensor=false".format(encoded_address)
