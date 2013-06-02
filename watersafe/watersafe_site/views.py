@@ -101,8 +101,12 @@ def get_pws_details_by_county(county_code):
   return county_list
 
 def Contact(address):
-  cicero_url = 'https://cicero.azavea.com/v3.1/official?search_address='+address+'&search_country=US&user=watersafe&key='+cicero_api_key
-  return cicero_data
+  address = address.replace(' ','+')
+  url = 'https://cicero.azavea.com/v3.1/official?search_address='+address+'&search_country=US&user=watersafe&key='+cicero_api_key
+  body = {}
+  headers = {'Content-type': 'application/json'}
+  response, content = http.request(url, 'GET', headers=headers, body=urllib.urlencode(body))
+  return content
 
 def search_form(request):
   return render_to_response('index.html', context_instance=RequestContext(request))
@@ -112,6 +116,7 @@ def Search(request):
     address = request.POST['address']
   else: 
     address = "20 N. 3rd St Philadelphia"
+  contact_results = Contact(address)
 
   county_code = get_county_code_by_address(address)
   ranking_info = get_ranking_info_by_county(county_code)
