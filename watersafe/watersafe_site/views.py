@@ -127,6 +127,9 @@ def Contact(address):
 def search_form(request):
   return render_to_response('index.html', context_instance=RequestContext(request))
 
+def LearnMore(request):
+  return render_to_response('learn_more.html', context_instance=RequestContext(request))
+
 def Search(request):
   if 'address' in request.POST:
     address = request.POST['address']
