@@ -59,12 +59,9 @@ def get_count(county_code):
   connection = engine.connect()
 
   query = """
-    SELECT CSM.`FIPS_COUNTY_ID` countyid,  CSM.`COUNTY_NAME` countyname, count(*) violations
-    FROM PA_H20_VIOLATION PAH, COUNTY_STATE_MAPPING CSM
-    WHERE PAH.`Vtype` NOT IN ('MR','Other')
-    AND PAH.`County` = CSM.`FIPS_COUNTY_ID`
-    AND YEAR(PAH.`comp_begin_date`) >= 2012
-    AND CSM.`FIPS_COUNTY_ID` = {0} 
+    SELECT PACR.`county_id` county, PACR.`incident_count` incidents, PACR.`rank` rank, PACR.`bucket` bucket
+    FROM PA_COUNTY_VIOLATION_RANK PACR
+    WHERE county_id = {0} 
   """
   results = connection.execute(query.format(county_code))
 
