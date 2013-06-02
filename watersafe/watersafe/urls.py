@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from watersafe_site.views import Search, search_form
+from watersafe_site.views import Search, LearnMore, search_form
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # Examples:
     ('^$', search_form),
     ('^results$', Search),
+    ('^learn_more$', LearnMore),
     # url(r'^$', 'watersafe.views.home', name='home'),
     # url(r'^watersafe/', include('watersafe.foo.urls')),
 
