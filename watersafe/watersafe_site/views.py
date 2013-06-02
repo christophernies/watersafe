@@ -4,11 +4,6 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext, loader
 from datetime import timedelta, date
 import json, urllib, httplib2
-
-import urllib
-import httplib2
-import json
-
 from sqlalchemy import create_engine
 from bs4 import BeautifulSoup
 
@@ -58,27 +53,8 @@ def get_county_code_by_address(address):
   result.close()
   return counties[0]
 
-# XXX He's dead, Jim. 
-# This site limits us to 30 requests a day, oh well.
-# Scrape http://zip-info.com to get county info
-def get_county_by_zip(zip):
-  url = "http://www.zip-info.com/cgi-local/zipsrch.exe?cnty=cnty&zip={0}&Go=Go".format(zip)
-  response = do_GET(url)
-  soup = BeautifulSoup(response)
-
-  # There's a handful of tables in the page, the one we care about is the third one.
-  results_table_index = 3
-  results_table = soup.find_all('table')[results_table_index]
-
-  # 4th column has the county code
-  county_column_index = 4
-  county_code_tag = results_table.find_all('td')[county_column_index]
-  county_code = county_code_tag.contents
-  return county_code
-
-
-
 def Search(request):
   test_address = "20 N. 3rd St Philadelphia"
-  a = get_county_code_by_address(test_address)
-  return render_to_response('index.html',{'msg':a})
+  test_county_code = get_county_code_by_address(test_address)
+
+  return render_to_response('index.html',{'msg':test_county_code})
