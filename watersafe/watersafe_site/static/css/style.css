@@ -114,6 +114,7 @@ body {
 .county-name {
 	color:#666;
 	padding-left: 5px;
+  text-transform: capitalize;
 }
 
 /* helper css */
