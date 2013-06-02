@@ -47,7 +47,7 @@ def get_county_code_by_address(address):
   zip = get_zip_from_address(address)
 
   # Probably will want to pass the connection in.
-  engine = create_engine('mysql://root:root@localhost/watersafe')
+  engine = create_engine('mysql://admin:admin@localhost/watersafe')
   connection = engine.connect()
 
   result = connection.execute('select fips_county_id from zip_county_mapping where zip={0}'.format(zip).upper())
@@ -92,5 +92,5 @@ def get_county_by_zip(zip):
 #   print violations
 
 # Test database queries for county codes works
-test_address = "20 North 3rd Street, Philadelphia PA"
+test_address = "20 N. 3rd St Philadelphia"
 print get_county_code_by_address(test_address)
