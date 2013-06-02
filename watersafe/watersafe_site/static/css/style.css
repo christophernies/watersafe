@@ -290,3 +290,63 @@ a:hover {
    border-top-color: #c75600;
    background: #c75600;
 }
+
+
+
+/** added today  **/ 
+
+.search-on-results input[type=text] {
+	width:246px;
+	font-size: 14px;
+	padding: 5px 2px;
+	color:#353535;
+	font-style: italic;
+}
+
+.search-on-results input[type=submit] {
+
+}
+
+#details {
+	margin-left: 10px;
+}
+
+#details .item {
+	width: 270px;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	background: -webkit-linear-gradient(top, #ffffff 0%,#fafafa 50%,#f8f8f8 100%);
+	box-shadow: 0 1px 2px 0 #ddd;
+	float: left;
+	margin-right: 14px;
+}
+
+#details .item p {
+	margin:0px;
+	padding:0px;
+}
+
+#details .item p.name {
+	font-size:16px;
+}
+
+#details .item .wrapper p {
+	margin: 7px 0;
+}
+
+.item .active-type {
+	font-weight: bold;
+}
+.item .active {
+	color:green;
+}
+
+.item .inactive {
+	color:#999;
+}
+
+.item .violations {
+	padding: 10px;
+	opacity: .7;
+}

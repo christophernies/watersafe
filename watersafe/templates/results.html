@@ -86,6 +86,43 @@
 				</div>
 
 				<br />
+
+				<div id="total">
+					<h2>{{ incident_count }} Total Violations</h2>
+					<br />
+				</div>
+
+				
+				<div id="details">
+					{% for item in pws_info %}
+						<div class="item">
+							<div class="top">
+								<div class="name left">
+									<p style="font-weight:bold; font-size:14px;">{{ item.pws_name }}</p>
+								</div>
+
+								<div class="active-type right">
+									<p class="active">{{item.pws_status}}</p>
+								</div>
+
+								<br class="clear-both" />
+							</div>
+
+							<div class="wrapper">
+								<p>City: <span class="city">{{contact_city}}</span></p>
+								<p>Population Served: <span class="served">{{population_served}}</span></p>
+
+
+								<div class="violations red-rating">
+									<p>Violation: <span class="type">{{ violation_name }}</span></p>
+									<p>Contaminant: <span class="chemical">{{ contaminant }} X</span></p>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<br style="clear-left" />
+
 				<h2>Map Violations by County</h2>
 				<iframe width="660" height="380" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col1+from+1LgtFNMlxShzmrUQc4U7uBYRfv6UjAR6JTXOZUTY&amp;viz=MAP&amp;h=false&amp;lat=40.757678557632595&amp;lng=-77.19808893750002&amp;t=1&amp;z=7&amp;l=col1&amp;y=3&amp;tmplt=5"></iframe>
 				
