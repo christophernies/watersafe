@@ -57,29 +57,36 @@
 					<hr />
 
 					<p>
-
+						{% if bucket == "G" %}
+                            Your water is in great shape.
+                        {% elif bucket == "Y" %}
+                            Warning: Your water is alright but could be better.
+                        {% else %}
+                            Contact your state rep right away, you should not be drinking this water at all.
+                        {% endif %}
 					</p>
 
-					<div class="sharing right">
-						<div class="social-icons left">
-							<!-- AddThis Button BEGIN -->
-							<div class="addthis_toolbox addthis_default_style ">
-								<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-								<a class="addthis_button_tweet"></a>
-							</div>
-							<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-51aa48f2699c65f9"></script>
-							<!-- AddThis Button END -->
-						</div>
-
-						<div class="rep-button right">
-              				<button class="{{rating_button}}"> 
+					<div class="sharing">
+						<div>
+							<button class="green-button">
 								{% if bucket == "G" %}
-   									Thank Your Rep
-								{% else %}
-   									Contact Rep
-								{% endif %}
+                                    Thank Your Rep
+                                {% else %}
+                                    Contact Rep
+                                {% endif %}
 							</button>
+							<button class="green-button">Tell Others to Check</button>
 						</div>
+					</div>
+
+					<div class="social" style="display:none;">
+						<!-- AddThis Button BEGIN -->
+						<div class="addthis_toolbox addthis_default_style ">
+							<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+							<a class="addthis_button_tweet"></a>
+						</div>
+						<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-51aa48f2699c65f9"></script>
+						<!-- AddThis Button END -->
 					</div>
 
 					<br class="clear-right" />
@@ -120,11 +127,8 @@
 							</div>
 						</div>
 					{% endfor %}
+					<br style="clear:both;" />
 				</div>
-				<br style="clear-left" />
-
-				<h2>Map Violations by County</h2>
-				<iframe width="660" height="380" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?q=select+col1+from+1LgtFNMlxShzmrUQc4U7uBYRfv6UjAR6JTXOZUTY&amp;viz=MAP&amp;h=false&amp;lat=40.757678557632595&amp;lng=-77.19808893750002&amp;t=1&amp;z=7&amp;l=col1&amp;y=3&amp;tmplt=5"></iframe>
 				
 			</div>
 			<br class="clear-both" />
