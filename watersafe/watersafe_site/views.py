@@ -100,9 +100,9 @@ def get_pws_details_by_county(county_code):
     county_list.append(county)
   return county_list
 
-def Contact:
-    cicero_url = 'https://cicero.azavea.com/v3.1/official?search_address='+address+'&search_country=US&user=watersafe&key='+cicero_api_key
-
+def Contact(address):
+  cicero_url = 'https://cicero.azavea.com/v3.1/official?search_address='+address+'&search_country=US&user=watersafe&key='+cicero_api_key
+  return cicero_data
 
 def search_form(request):
   return render_to_response('index.html', context_instance=RequestContext(request))
