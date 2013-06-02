@@ -12,7 +12,7 @@
 
 		<div id="search-form">
 			<div class="fields">
-				<form action="./results.html" method="post">
+				<form action="./results" method="post">{% csrf_token %}
 					<input type="text" name="search" id="address" placeholder="Enter your address..." />
 					<br />
 					<br />

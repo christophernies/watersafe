@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from watersafe_site.views import Search
+from watersafe_site.views import Search, search_form
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
