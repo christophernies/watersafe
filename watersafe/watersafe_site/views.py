@@ -132,6 +132,6 @@ def Search(request):
       'incident_count': ranking_info['incident_count'],
       'bucket': ranking_info['bucket'],
       'rank': ranking_info['rank'],
-      'rating_type': rating_type.
+      'rating_type': rating_type,
       'rating_button': rating_button
   }, context_instance=RequestContext(request))
