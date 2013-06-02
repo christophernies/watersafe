@@ -53,7 +53,7 @@ def get_county_code_by_address(address):
   result.close()
   return counties[0]
 
-def get_count(county_code):
+def get_ranking_info_by_county(county_code):
   # Probably will want to pass the connection in.
   engine = create_engine('mysql://admin:admin@localhost/watersafe')
   connection = engine.connect()
@@ -65,8 +65,17 @@ def get_count(county_code):
   """
   results = connection.execute(query.format(county_code))
 
-  count = [result[2] for result in results]
-  return count[0]
+  rankings = []
+  for result in results:
+    county_ranking_info = {}
+    county_ranking_info['county_id'] = result[0]
+    county_ranking_info['incident_count'] = result[1]
+    county_ranking_info['rank'] = result[2]
+    county_ranking_info['bucket'] = result[3]
+    rankings.append(county_ranking_info)
+
+  # This should only return one result.
+  return rankings[0]
 
 def get_pws_details_by_county(county_code):
   # Probably will want to pass the connection in.
@@ -109,4 +118,12 @@ def Search(request):
   else: address = "20 N. 3rd St Philadelphia"
   county_code = get_county_code_by_address(address)
 
-  return render_to_response('results.html',{'county_id':county_code, 'address':address}, context_instance=RequestContext(request))
+  ranking_info get_ranking_info_by_county(county_code)
+
+  return render_to_response('results.html', {
+      'county_id': county_code, 
+      'address': address,
+      'incident_count': ranking_info['incident_count'],
+      'bucket': ranking_info[bucket],
+      'rank': ranking_info['rank'],
+  }, context_instance=RequestContext(request))
