@@ -7,7 +7,8 @@ from watersafe_site.views import Search
 
 urlpatterns = patterns('',
     # Examples:
-    ('^$', Search),
+    ('^$', search_form),
+    ('^results$', Search),
     # url(r'^$', 'watersafe.views.home', name='home'),
     # url(r'^watersafe/', include('watersafe.foo.urls')),
 
